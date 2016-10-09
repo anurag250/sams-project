@@ -1,0 +1,26 @@
+#define BLYNK_PRINT Serial
+#include <SPI.h>
+#include <Ethernet.h>
+#include <BlynkSimpleEthernet.h>
+#include <Servo.h>
+
+char auth[] = "auth key";
+
+Servo servo;
+
+void setup()
+{
+  Serial.begin(9600); 
+  Blynk.begin(auth);
+  servo.attach(9);
+}
+
+BLYNK_WRITE(V3)
+{
+  servo.write(param.asInt());
+}
+
+void loop()
+{
+  Blynk.run();
+}
